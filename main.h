@@ -12,15 +12,20 @@ class ServerFarm
 {
 public:
 	Server *s;
- 	Farm();
- 	~Farm();
+	int farm_id;
+	int server_num;
+ 	ServerFarm();
+ 	ServerFarm(int server_num);
+ 	~ServerFarm();
+ 	void configServer(int farm_id);
 };
 
 class Server
 {	
-	public:
+public:
 	int vm_num;
  	int ready_time;
+ 	int farm_id;
  	const int cpu_total = 1;
  	const int memory_total = 1;
  	Server();
