@@ -23,41 +23,50 @@ public:
 class Server
 {	
 public:
+	VM *v;
 	int vm_num;
- 	int ready_time;
  	int farm_id;
  	const int cpu_total = 1;
  	const int memory_total = 1;
  	Server();
+ 	Server(int vm_num);
  	~Server();
- 	void updateTime(int);
+ 	
 };
 
 class VM
 {
 public:
- 	int vm_type;
  	int cpu_frac;
  	int memory_frac;
+ 	int ready_time = 0;
  	VM();
  	~VM();
+ 	void updateTime(int);
 };
 
 class Job
 {
 public:
  	Task *t;
+ 	int deadline;
  	int task_num;
+ 	int job_id;
  	Job();
+ 	Job(int job_id, int task_num);
  	~Job();
+ 	void configJob();
 };
 
 class Task
 {
 public:
- 	float core;
- 	float memory;
- 	Task();
+	int job_id;
+	int start_time;
+	int exe_period;
+	int task_type;
+ 	float cpu_usage;
+ 	float memory_usage;
+ 	Task(int start_time, int job_id, int task_type, float cpu_usage, float memory_usage);
  	~Task();
- 
 };
