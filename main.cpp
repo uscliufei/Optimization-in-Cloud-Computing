@@ -14,11 +14,33 @@ void VM:: updateTime(int period){
 
 Server:: Server(){
 	this->vm_num = 4;
+	while(true){
+			double r = rand() / double(RAND_MAX);
+			if(r >= 0.4 && r <= 0.7){
+				utilization_opt_rate = r;
+				break;
+			}
+		}
+
+	while(true){
+			double r = rand() / double(RAND_MAX);
+			if(r >= 0.3 && r <= 0.5){
+				alaph = r;
+				break;
+			}
+		}
+
+	while(true){
+			int r = rand()%10 + 5;
+			beta = r;
+		}
+
 }
 
 Server:: Server(int vm_num){
 	v = new VM[vm_num];
 	this->vm_num = vm_num;
+
 }
 
 Server:: ~Server(){};

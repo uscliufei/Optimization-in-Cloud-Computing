@@ -26,6 +26,9 @@ public:
 	VM *v;
 	int vm_num;
  	int farm_id;
+    double alaph;
+    int beta;
+    double utilization_opt_rate;
  	// const int cpu_total = 1;
  	// const int memory_total = 1;
  	Server();
