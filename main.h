@@ -1,3 +1,4 @@
+
 #ifndef MAIN_H
 #define MAIN_H
 
@@ -8,65 +9,50 @@
 #include <sstream>
 using namespace std;
 
-class ServerFarm
-{
+class ServerFarm{
 public:
 	Server *s;
-	int farm_id;
 	int server_num;
- 	ServerFarm();
- 	ServerFarm(int server_num);
- 	~ServerFarm();
- 	void configServer(int farm_id);
+ 	Farm();
+ 	Farm()
+ 	~Farm();
 };
 
-class Server
-{	
-public:
-	VM *v;
+class Server {	
+	public:
 	int vm_num;
- 	int farm_id;
+ 	
  	const int cpu_total = 1;
  	const int memory_total = 1;
  	Server();
- 	Server(int vm_num);
  	~Server();
- 	
 };
 
-class VM
-{
+class VM {
 public:
+ 	int vm_type;
  	int cpu_frac;
+ 	int ready_time;
  	int memory_frac;
- 	int ready_time = 0;
  	VM();
  	~VM();
- 	void updateTime(int);
 };
 
-class Job
-{
+class Job {
 public:
  	Task *t;
- 	int deadline;
  	int task_num;
- 	int job_id;
  	Job();
- 	Job(int job_id, int task_num);
  	~Job();
- 	void configJob();
 };
 
-class Task
-{
+class Task {
 public:
-	int job_id;
-	int start_time;
-	int exe_period;
-	int task_type;
- 	float cpu_usage;
- 	float memory_usage;
- 	Task(int start_time, int job_id, int task_type, float cpu_usage, float memory_usage);
+ 	float core;
+ 	float memory;
+ 	Task();
  	~Task();
+ 
 };
+
+#endif
