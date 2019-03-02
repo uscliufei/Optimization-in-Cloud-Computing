@@ -5,18 +5,6 @@ int main() {
 
     //clound model
     cout<<"start clound model" << endl;
-    /*ServerFarm *test = new ServerFarm(10);
-    cout<<"-------------"<<endl;
-    test->configServer(1, 4);
-    test->farm_id = 1;
-    cout<< "farmid " << test->farm_id << " servernum " << test->server_num << endl; 
-    for(int i = 0; i < test->server_num; i++){
-        test->s[i].configVM();
-        for(int j = 0; j < test->s[i].vm_num; j++){
-            cout << test->s[i].v[j].cpu_frac << "  "  << test->s[i].v[j].memory_frac << endl;
-        }
-        cout << "===========" << endl;
-    }*/
 
     ServerFarm serverfarm[10];
     for(int i = 0;i < 10;i++)
@@ -80,14 +68,64 @@ int main() {
     fp2.close();
     fp3.close();
     fp4.close();
-    for(int i = 100;i < 130;i++)
+    // for(int i = 100;i < 130;i++)
+    // {
+    //     if (data[i].gettime() == -1)
+    //     {
+    //         cout<<"not enough info! skip!" << endl;
+    //         continue;
+    //     } 
+    //     greedy(data[i],serverfarm[0].s,10);
+    // }
+
+    queue<Task> task_queue;
+    Task cur_task;
+    for(int i = 0; i< 300; i++)
     {
-        if (data[i].gettime() == -1)
+        if(task_queue.empty())
         {
-            cout<<"not enough info! skip!" << endl;
-            continue;
-        } 
-        greedy(data[i],serverfarm[0].s,10);
+            if (data[i].gettime() == -1)
+              {
+                cout<<"not enough info! skip!" << endl;
+                continue;
+            }
+            else{
+                cur_task = data[i];
+                
+            }     
+        }
+        else{
+                Task q1 = task_queue.front();
+                if(q1.gettime() < data[i].gettime())
+                {
+                    cur_task = q1;
+                    task_queue.pop();
+                    i--;
+                                    }
+                else{
+                    if (data[i].gettime() == -1)
+                    {
+                        cout<<"not enough info! skip!" << endl;
+                        continue;
+                    }
+                    else{
+                        cur_task = data[i];
+                    }
+                }
+        }
+        cout<<"------------"<<endl;
+        round_robin(cur_task,serverfarm,10,10,100,task_queue);
     }
+    cout<<"--------------"<<endl;
+    while(!task_queue.empty())
+    {
+        cur_task = task_queue.front();
+        round_robin(cur_task,serverfarm,10,10,100,task_queue);
+        cout<<"task_queue.size(): "<<task_queue.size()<<endl;
+        cout<<"pop the task " << endl;
+        task_queue.pop();
+        cout<<"task_queue.size(): "<<task_queue.size()<<endl;
+    }
+
 
 }

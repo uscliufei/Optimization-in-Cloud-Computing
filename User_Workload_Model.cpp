@@ -7,6 +7,7 @@ Task::Task(){
 		memory_frac = -1;
 		execution_time = -1;
 		vm_type = rand()%4;
+		hard_deadline = -1;
 	}
 Task::~Task(){}
 
@@ -19,8 +20,11 @@ void Task::setcpu(float cpu){
 void Task::setmemory(float memory){
 		this->memory_frac = memory;
 	}
-void Task::setexecution_time(int execution_time){
+void Task::setexecution_time(float execution_time){
 	this->execution_time = execution_time;
+}
+void Task::sethard_deadline(float hard_deadline){
+	this->hard_deadline = hard_deadline;
 }
 int Task::gettime(){
 		return time;
@@ -34,6 +38,10 @@ float Task::getmemory(){
 int Task::getexecution_time()
 {
 	return execution_time;
+}
+float Task::gethard_deadline()
+{
+	return hard_deadline;
 }
 void Task::print_task()
 {

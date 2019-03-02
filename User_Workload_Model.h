@@ -13,19 +13,22 @@ class Task {
     float memory_frac;
     float execution_time; //sec
     int vm_type;
+    float hard_deadline;
     public:
     Task();
     ~Task();
     void settime(int time);
     void setcpu(float cpu);
     void setmemory(float memory);
-    void setexecution_time(int execution_time);
+    void setexecution_time(float execution_time);
+    void sethard_deadline(float hard_deadline);
     int gettime();
     float getcpu();
     float getmemory();
     int getexecution_time();
     void print_task();
     int get_vmtype();
+    float gethard_deadline();
 
 
 };
